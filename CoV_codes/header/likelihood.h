@@ -12,12 +12,11 @@ double my_log(double x)
 
 double Priors(Par *p)
 {
-    double fv0=gsl_ran_lognormal_pdf(p->v0,log(2),1);
+    double fv0=gsl_ran_lognormal_pdf(p->v0,log(p->E0s*p->piv/p->dv),1);
     double fdv=gsl_ran_lognormal_pdf(p->dv,log(2),1);
-    double fdEs=gsl_ran_lognormal_pdf(p->dEs,log(p->dv/p->piv*p->v0),1);
+    double fdEs=gsl_ran_lognormal_pdf(p->dEs,log(2),1);
     double fE0s=gsl_ran_lognormal_pdf(p->E0s,log(2),1);
     double fpiv=gsl_ran_lognormal_pdf(p->piv,log(2),1);
-    double fR0=gsl_ran_lognormal_pdf(E0*p->beta*p->piv/p->dv/p->dEs,log(2),1);
     return my_log(fv0)+my_log(fdEs)+my_log(fdv)+my_log(fE0s)+my_log(fR0)+my_log(fpiv);
 }
 
