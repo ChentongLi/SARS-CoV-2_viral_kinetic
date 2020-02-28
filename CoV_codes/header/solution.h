@@ -29,7 +29,7 @@ void SolveIntegral(Par *p)
     s[0].v=p->v0;
     while (i<=EnT){
         s[i+1].Ep=BackEuler(dE*E0,p->beta*s[i].v+dE,s[i].Ep);
-        s[i+1].Eps=BackEuler(p->beta*s[i+1].Ep,p->dEs,s[i].Eps);
+        s[i+1].Eps=BackEuler(p->beta*s[i+1].Ep*s[i].v,p->dEs,s[i].Eps);
         s[i+1].v=BackEuler(p->piv*s[i+1].Eps,p->dv,s[i].v);
         i++;
     }
