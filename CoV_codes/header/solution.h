@@ -24,7 +24,7 @@ void SolveIntegral(Par *p)
     int EnT=(data1[dl-1].day+1)/dt;
   //  double R0=p->beta*p->piv*E0/p->dv/p->dEs;
     s=malloc(sizeof(Solution)*(EnT+1));
-    s[0].Ep=E0;
+    s[0].Ep=E0-p->E0s;
     s[0].Eps=p->E0s;
     s[0].v=p->v0;
     while (i<=EnT){
