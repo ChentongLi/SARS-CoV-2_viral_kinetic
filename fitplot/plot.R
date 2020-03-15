@@ -1,0 +1,30 @@
+library(ggplot2)
+library(plyr)
+
+result<-read.csv("solution.csv",sep="\t", header = FALSE)
+t<-seq(0,24,0.25)
+result<-result[1:56136,1:length(t)]
+
+library(HDInterval)
+rmin<-c()
+rmax<-c()
+for (i in seq(1:length(t)) ){
+  a<-hdi(result[i])
+  rmin<-c(rmin,a[[1]])
+  rmax<-c(rmax,a[[2]])
+}
+rmean<-apply(result,2,mean)
+
+r1<-data.frame(t,rmin,rmean,rmax)
+colnames(r1)<-c("Days","Min","Mean","Max")
+
+r<-read.csv("data19_s.csv",header=FALSE)
+colnames(r)=c("Day","Value")
+
+p1<-ggplot(r1) + geom_line(aes(x=Days,y=Mean)) + 
+  geom_ribbon(aes(x=Days,ymax = Max, ymin = Min),alpha=0.7, fill = "skyblue") +
+  geom_point(data = r ,aes(x=Day,y=Value)) + xlab("Days after symptom on set")+
+  ylab("Chest radiograph score")+ggtitle("The data and fitted line")+
+  theme(plot.title = element_text(hjust = 0.5)) + xlim(0,24)+ylim(0,15)
+p1
+ ggsave("fig1.pdf", p1, width = 6, height = 5)
