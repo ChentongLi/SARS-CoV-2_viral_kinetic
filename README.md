@@ -7,4 +7,4 @@ The within-host viral kinetics of SARS-CoV-2[J].Mathematical Biosciences and Eng
 
 The file CoV_codes are the c code to generate the samples of parameters. 
 
-The File fitplot is the R file to statistically analyze the generated samples.
+The File fitplot is the R code to statistically analyze the generated samples.
